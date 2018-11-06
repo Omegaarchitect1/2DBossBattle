@@ -272,7 +272,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4294967039
-  jumpForce: 500
+  jumpForce: 400
 --- !u!58 &61942018
 CircleCollider2D:
   m_ObjectHideFlags: 0
