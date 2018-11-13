@@ -76,7 +76,7 @@ public class PlayerControls : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Collctable"))
+        if (other.gameObject.CompareTag("Collectable"))
         {
            other.gameObject.SetActive(false);
         }
