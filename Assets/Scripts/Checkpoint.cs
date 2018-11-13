@@ -21,10 +21,12 @@ public class Checkpoint : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player") && !IsActive)
-        Debug.Log("Checkpoint reached!");
-        PlayerControls player = collision.GetComponent<PlayerControls>();
-        player.SetCurrentCheckpoint(this);
-        audiosource.Play();
+        if (collision.gameObject.CompareTag("Player") && !IsActive)
+        {
+            Debug.Log("Checkpoint reached!");
+            PlayerControls player = collision.GetComponent<PlayerControls>();
+            player.SetCurrentCheckpoint(this);
+            audiosource.Play();
+        }
     }
 }
