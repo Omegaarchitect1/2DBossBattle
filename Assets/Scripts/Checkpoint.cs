@@ -8,8 +8,13 @@ public class Checkpoint : MonoBehaviour {
 
     private AudioSource audiosource;
 
+    private void Start()
+    {
+        audiosource = GetComponent<AudioSource>();
+    }
 
-	public void setIsActive(bool value)
+
+    public void setIsActive(bool value)
     {
         IsActive = value;
     }

@@ -27,11 +27,14 @@ public class PlayerControls : MonoBehaviour {
 
     private Checkpoint currentCheckpoint;
 
+    private AudioSource audiosource;
+
 	// Use this for initialization
 	void Start () {
         rigidbody2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-	}
+        audiosource = GetComponent<AudioSource>();
+    }
 	
 	
 	// Update is called once per frame
@@ -79,6 +82,7 @@ public class PlayerControls : MonoBehaviour {
         if (other.gameObject.CompareTag("Collectable"))
         {
            other.gameObject.SetActive(false);
+            audiosource.Play();
         }
     }
 
