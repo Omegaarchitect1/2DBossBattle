@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControls : MonoBehaviour {
 
@@ -9,7 +10,8 @@ public class PlayerControls : MonoBehaviour {
 
     bool facingright = true;
 
-    Rigidbody2D rigidbody2D;
+    [SerializeField]
+    private Rigidbody2D rigidbody2D;
 
     Animator anim;
 
@@ -22,6 +24,8 @@ public class PlayerControls : MonoBehaviour {
     public LayerMask whatIsGround;
 
     public float jumpForce = 700;
+
+    private Checkpoint currentCheckpoint;
 
 	// Use this for initialization
 	void Start () {
@@ -49,7 +53,7 @@ public class PlayerControls : MonoBehaviour {
         if (move > 0 && !facingright)
             Flip();
         else if(move < 0 && facingright)
-                Flip();
+            Flip();
 
 
 	}
@@ -68,5 +72,35 @@ public class PlayerControls : MonoBehaviour {
         facingright = !facingright;
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Collctable"))
+        {
+           other.gameObject.SetActive(false);
+        }
+    }
+
+
+    public void Respawn()
+    {
+        if (currentCheckpoint == null)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        else
+        {
+            rigidbody2D.velocity = Vector2.zero;
+            transform.position = currentCheckpoint.transform.position;
+        }
+    }
+
+    public void SetCurrentCheckpoint(Checkpoint newcurrentChceckpoint)
+    {
+        if (currentCheckpoint != null)
+            currentCheckpoint.setIsActive(false);
+
+        currentCheckpoint = newcurrentChceckpoint;
+        currentCheckpoint.setIsActive(true);
     }
 }
