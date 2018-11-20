@@ -13,7 +13,7 @@ public class Door : MonoBehaviour {
     {
         if (collision.CompareTag("Player"))
         {
-
+            Debug.Log("Press E to enter");
             isPlayerInTrigger = true;
 
         }

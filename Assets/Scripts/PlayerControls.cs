@@ -16,7 +16,9 @@ public class PlayerControls : MonoBehaviour {
     [SerializeField]
     private Collider2D playerGroundCollider;
 
-    Animator anim;
+    
+
+    public Animator anim;
 
     bool grounded = false;
 
@@ -34,6 +36,8 @@ public class PlayerControls : MonoBehaviour {
 
     private float HorizontalInput;
 
+    public bool isDead;
+
     [SerializeField]
     private PhysicsMaterial2D playerMovingPhys, playerStoppingPhys;
 
@@ -48,26 +52,40 @@ public class PlayerControls : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-       
-        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
-        anim.SetBool("Ground", grounded);
+        if (!isDead)
+        {
+            grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+            anim.SetBool("Ground", grounded);
 
-        anim.SetFloat("vSpeed", rigidbody2D.velocity.y);
+            anim.SetFloat("vSpeed", rigidbody2D.velocity.y);
 
 
-        float move = Input.GetAxis("Horizontal");
+            float move = Input.GetAxis("Horizontal");
 
-        anim.SetFloat("Speed", Mathf.Abs(move));
+            anim.SetFloat("Speed", Mathf.Abs(move));
 
-        rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
+            rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
 
-        UpdatePhysicsMaterial();
+            UpdatePhysicsMaterial();
 
-        if (move > 0 && !facingright)
-            Flip();
-        else if(move < 0 && facingright)
-            Flip();
+            if (move > 0 && !facingright)
+                Flip();
+            else if (move < 0 && facingright)
+                Flip();
 
+        }
+        else
+        {
+            Debug.Log("you died! press e to continue");
+            anim.SetBool("Ground", true);
+            anim.SetBool("isDead", isDead);
+            rigidbody2D.velocity = Vector3.zero;
+
+            if (Input.GetButtonDown("Activate"))
+            {
+                Respawn();
+            }
+        }
 
 	}
 
@@ -77,7 +95,9 @@ public class PlayerControls : MonoBehaviour {
         {
             anim.SetBool("Ground", false);
             rigidbody2D.AddForce(new Vector2(0, jumpForce));
+           
         }
+        anim.SetBool("isDead", isDead);
     }
 
     private void UpdatePhysicsMaterial()
@@ -97,6 +117,7 @@ public class PlayerControls : MonoBehaviour {
         facingright = !facingright;
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
+        transform.localScale = theScale;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -119,6 +140,8 @@ public class PlayerControls : MonoBehaviour {
             rigidbody2D.velocity = Vector2.zero;
             transform.position = currentCheckpoint.transform.position;
         }
+        isDead = false;
+        anim.SetBool("isDead", isDead);
     }
 
     public void SetCurrentCheckpoint(Checkpoint newcurrentChceckpoint)

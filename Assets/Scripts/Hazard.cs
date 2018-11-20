@@ -19,8 +19,12 @@ public class Hazard : MonoBehaviour {
 
             audiosource.Play();
             PlayerControls player = collision.GetComponent<PlayerControls>();
-            player.Respawn();
-           
+            player.isDead = true;
+            player.anim.SetBool("isDead", player.isDead);
+           // player.Respawn();
+            //player.isDead = false;
+           // player.anim.SetBool("isDead", player.isDead);
+
         }
     }
 }
