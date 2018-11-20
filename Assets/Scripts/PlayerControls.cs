@@ -13,6 +13,9 @@ public class PlayerControls : MonoBehaviour {
     [SerializeField]
     private Rigidbody2D rigidbody2D;
 
+    [SerializeField]
+    private Collider2D playerGroundCollider;
+
     Animator anim;
 
     bool grounded = false;
@@ -28,6 +31,11 @@ public class PlayerControls : MonoBehaviour {
     private Checkpoint currentCheckpoint;
 
     private AudioSource audiosource;
+
+    private float HorizontalInput;
+
+    [SerializeField]
+    private PhysicsMaterial2D playerMovingPhys, playerStoppingPhys;
 
 	// Use this for initialization
 	void Start () {
@@ -53,6 +61,8 @@ public class PlayerControls : MonoBehaviour {
 
         rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
 
+        UpdatePhysicsMaterial();
+
         if (move > 0 && !facingright)
             Flip();
         else if(move < 0 && facingright)
@@ -67,6 +77,18 @@ public class PlayerControls : MonoBehaviour {
         {
             anim.SetBool("Ground", false);
             rigidbody2D.AddForce(new Vector2(0, jumpForce));
+        }
+    }
+
+    private void UpdatePhysicsMaterial()
+    {
+        if(Mathf.Abs(HorizontalInput) > 0)
+        {
+            playerGroundCollider.sharedMaterial = playerMovingPhys;
+        }
+        else
+        {
+            playerGroundCollider.sharedMaterial = playerStoppingPhys;
         }
     }
 

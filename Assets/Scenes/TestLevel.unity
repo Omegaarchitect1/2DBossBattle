@@ -606,6 +606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 357759700}
   - component: {fileID: 357759699}
+  - component: {fileID: 357759701}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -651,6 +652,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &357759701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 357759698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edaf79d1c14b9094a97a3521e6df7b7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneToLoad: TestLevelPart2
 --- !u!1 &444222401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,6 +1086,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114515332841768682, guid: cc023f422a28f2a48aa5d308eda40049,
+        type: 2}
+      propertyPath: playerMovingPhys
+      value: 
+      objectReference: {fileID: 6200000, guid: 5208ceb6e18d1ce48b9f9659d937a672, type: 2}
+    - target: {fileID: 114515332841768682, guid: cc023f422a28f2a48aa5d308eda40049,
+        type: 2}
+      propertyPath: playerStoppingPhys
+      value: 
+      objectReference: {fileID: 6200000, guid: 707b91cec48984c4983e4e35daecd25b, type: 2}
+    - target: {fileID: 114515332841768682, guid: cc023f422a28f2a48aa5d308eda40049,
+        type: 2}
+      propertyPath: playerGroundCollider
+      value: 
+      objectReference: {fileID: 1965756931}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc023f422a28f2a48aa5d308eda40049, type: 2}
   m_IsPrefabParent: 0
@@ -2532,3 +2560,8 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9faf51bf30b1b5c48b1e7b858068cdca, type: 2}
   m_IsPrefabParent: 0
+--- !u!58 &1965756931 stripped
+CircleCollider2D:
+  m_PrefabParentObject: {fileID: 58143814285205960, guid: cc023f422a28f2a48aa5d308eda40049,
+    type: 2}
+  m_PrefabInternal: {fileID: 787205482}
