@@ -30,6 +30,8 @@ public class PlayerControls : MonoBehaviour {
 
     public float jumpForce = 700;
 
+   // public float glideForce = 350;
+
     private Checkpoint currentCheckpoint;
 
     private AudioSource audiosource;
@@ -97,7 +99,16 @@ public class PlayerControls : MonoBehaviour {
             rigidbody2D.AddForce(new Vector2(0, jumpForce));
            
         }
+        if (grounded == false && Input.GetButtonDown("Glide"))
+        {
+            Glide();
+        }
         anim.SetBool("isDead", isDead);
+    }
+
+    private void Glide()
+    {
+        rigidbody2D.drag = 3;
     }
 
     private void UpdatePhysicsMaterial()
@@ -152,4 +163,6 @@ public class PlayerControls : MonoBehaviour {
         currentCheckpoint = newcurrentChceckpoint;
         currentCheckpoint.setIsActive(true);
     }
+
+    
 }
