@@ -82,6 +82,7 @@ public class PlayerControls : MonoBehaviour {
             anim.SetBool("Ground", true);
             anim.SetBool("isDead", isDead);
             rigidbody2D.velocity = Vector3.zero;
+           
 
             if (Input.GetButtonDown("Activate"))
             {
