@@ -100,16 +100,23 @@ public class PlayerControls : MonoBehaviour {
             rigidbody2D.AddForce(new Vector2(0, jumpForce));
            
         }
-        if (grounded == false && Input.GetButtonDown("Glide"))
+        if (grounded == false && Input.GetKeyDown(KeyCode.W))
         {
             Glide();
+        }
+        else if (Input.GetKeyUp(KeyCode.W))
+        {
+
+            rigidbody2D.gravityScale = 1.0f;
+           
+
         }
         anim.SetBool("isDead", isDead);
     }
 
     private void Glide()
     {
-        rigidbody2D.drag = 3;
+        rigidbody2D.gravityScale = 0.25f;
     }
 
     private void UpdatePhysicsMaterial()
