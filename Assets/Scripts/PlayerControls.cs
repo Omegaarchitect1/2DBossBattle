@@ -58,7 +58,7 @@ public class PlayerControls : MonoBehaviour {
         {
             grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
             anim.SetBool("Ground", grounded);
-            Debug.Log(grounded);
+        
 
             anim.SetFloat("vSpeed", rigidbody2D.velocity.y);
 
