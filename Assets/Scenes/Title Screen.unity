@@ -917,9 +917,9 @@ MonoBehaviour:
 
     A and D - Move
 
-    Space: Jump
+    Space - Jump
 
-    W when in the air- Float'
+    W when in the air - Float'
 --- !u!222 &1393901011
 CanvasRenderer:
   m_ObjectHideFlags: 0
