@@ -915,6 +915,8 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Controls:
 
+    E - Interact/Reset on Death
+
     A and D - Move
 
     Space - Jump
